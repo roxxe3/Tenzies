@@ -10,15 +10,23 @@ export default function Dice() {
                 isChosen: false
             }
         }
-        console.log(dicesObj)
         return dicesObj
     }
 
     const [dices, setDices] = useState(generateDices)
-    const dicesBtn = dices.map(dice => <button className="dice">{dice}</button>)
+    const handleClick = (key) => {
+        console.log("Button key:", key);
+      };
+    let dicesComp = []
+    Object.values(dices).forEach((dice, index) => {
+        dicesComp.push(<button onClick={handleClick} key={index + 1} className="dice"> {dice.value}</button>)
+      });
+
+
+
     return (
         <>
-        {dicesBtn}
+        {dicesComp}
         <button className="roll" onClick={()=> setDices(generateDices)}>Roll</button>
         </>
     )
